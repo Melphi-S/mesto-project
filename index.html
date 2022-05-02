@@ -1,89 +1,151 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="pages/index.css" />
+  </head>
+  <body>
     <div class="page">
-        <header class="header">
-            <div class="header__logo"></div>
-        </header>
-        <main class="content">
-            <section class="traveler">
-                <div class="traveler__heading">
-                    <div class="traveler__profile">
-                        <img src="images/profile-photo.jpg" alt="Фото профиля." class="traveler__photo">
-                        <div class="traveler__info">
-                            <h2 class="traveler__name">Жак-Ив Кусто</h2>
-                            <button type="button" class="traveler__edit-button button"></button>                            
-                            <p class="traveler__profession">Исследователь океана</p>
-                        </div>
-                    </div>
-                    <button type="button" class="traveler__add-button button"></button>
-                </div>
-                <div class="traveler__places">
-                    <article class="place">
-                        <img src="images/Saint-Petersburg.jpg" alt="Разведённый мост в Санкт-Петербурге." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Санкт-Петербург</h3>
-                            <button type="button" class="place__like-button place__like-button_active button"></button>
-                        </div>
-                    </article>
-                    <article class="place">
-                        <img src="images/Moscow.jpg" alt="Вид на Кремль с Москвы-реки." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Москва</h3>
-                            <button type="button" class="place__like-button place__like-button_active button"></button>
-                        </div>
-                    </article>
-                    <article class="place">
-                        <img src="images/Sochi.jpg" alt="Морской вокзал Сочи." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Сочи</h3>
-                            <button type="button" class="place__like-button place__like-button_active button"></button>
-                        </div>
-                    </article>
-                    <article class="place">
-                        <img src="images/Kazan.jpg" alt="Казанский кремль и мечеть Кул Шариф." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Казань</h3>
-                            <button type="button" class="place__like-button button"></button>
-                        </div>
-                    </article>
-                    <article class="place">
-                        <img src="images/Irkutsk.jpg" alt="Набережная Иркутска." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Иркутск</h3>
-                            <button type="button" class="place__like-button place__like-button_active button"></button>
-                        </div>
-                    </article>
-                    <article class="place">
-                        <img src="images/Vladivostok.jpg" alt="Золотой мост во Владивостоке." class="place__image">
-                        <div class="place__container">
-                            <h3 class="place__name">Владивосток</h3>
-                            <button type="button" class="place__like-button button"></button>
-                        </div>
-                    </article>
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
-        </footer>
+      <header class="header">
+        <div class="header__logo"></div>
+      </header>
+      <main class="content">
+        <section class="traveler">
+          <div class="traveler__heading">
+            <div class="traveler__profile">
+              <img
+                src="images/profile-photo.jpg"
+                alt="Фото профиля."
+                class="traveler__photo"
+              />
+              <div class="traveler__info">
+                <h2 class="traveler__name">Жак-Ив Кусто</h2>
+                <button
+                  type="button"
+                  class="traveler__edit-button button"
+                ></button>
+                <p class="traveler__profession">Исследователь океана</p>
+              </div>
+            </div>
+            <button type="button" class="traveler__add-button button"></button>
+          </div>
+          <div class="traveler__places">
+            <article class="place">
+              <img
+                src="images/Saint-Petersburg.jpg"
+                alt="Разведённый мост в Санкт-Петербурге."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Санкт-Петербург</h3>
+                <button
+                  type="button"
+                  class="place__like-button place__like-button_active button"
+                ></button>
+              </div>
+            </article>
+            <article class="place">
+              <img
+                src="images/Moscow.jpg"
+                alt="Вид на Кремль с Москвы-реки."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Москва</h3>
+                <button
+                  type="button"
+                  class="place__like-button place__like-button_active button"
+                ></button>
+              </div>
+            </article>
+            <article class="place">
+              <img
+                src="images/Sochi.jpg"
+                alt="Морской вокзал Сочи."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Сочи</h3>
+                <button
+                  type="button"
+                  class="place__like-button place__like-button_active button"
+                ></button>
+              </div>
+            </article>
+            <article class="place">
+              <img
+                src="images/Kazan.jpg"
+                alt="Казанский кремль и мечеть Кул Шариф."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Казань</h3>
+                <button
+                  type="button"
+                  class="place__like-button button"
+                ></button>
+              </div>
+            </article>
+            <article class="place">
+              <img
+                src="images/Irkutsk.jpg"
+                alt="Набережная Иркутска."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Иркутск</h3>
+                <button
+                  type="button"
+                  class="place__like-button place__like-button_active button"
+                ></button>
+              </div>
+            </article>
+            <article class="place">
+              <img
+                src="images/Vladivostok.jpg"
+                alt="Золотой мост во Владивостоке."
+                class="place__image"
+              />
+              <div class="place__container">
+                <h3 class="place__name">Владивосток</h3>
+                <button
+                  type="button"
+                  class="place__like-button button"
+                ></button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
+      </footer>
     </div>
     <div class="popup">
-        <div class="popup__container">
-            <form action="" class="popup__edit-form">
-                <h2 class="popup__form-heading">Редактировать профиль</h2>
-                <input type="text" name="name" placeholder="Имя путешественника" class="popup__form-item" value="Жак-Ив Кусто" required>
-                <input type="text" name="profession" placeholder="Род деятельности" class="popup__form-item" value="Исследователь океана">
-                <button type="submit" class="popup__form-button">Сохранить</button>
-            </form>
-            <button type="button" class="popup__close-button button"></button>
-        </div>
+      <div class="popup__container">
+        <form class="popup__edit-form">
+          <h2 class="popup__form-heading">Редактировать профиль</h2>
+          <input
+            type="text"
+            name="name"
+            placeholder="Имя путешественника"
+            class="popup__form-item"
+            value="Жак-Ив Кусто"
+            required
+          />
+          <input
+            type="text"
+            name="profession"
+            placeholder="Род деятельности"
+            class="popup__form-item"
+            value="Исследователь океана"
+          />
+          <button type="submit" class="popup__form-button">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close-button button"></button>
+      </div>
     </div>
-</body>
+  </body>
 </html>
