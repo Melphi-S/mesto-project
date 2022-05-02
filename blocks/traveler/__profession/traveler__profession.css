@@ -1,0 +1,24 @@
+.traveler__profession {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 980px) {
+    .traveler__profession {
+        font-size: 16px;
+        line-height: 19px;
+    } 
+}
+
+@media screen and (max-width: 620px) {
+    .traveler__profession {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        padding-top: 7px;
+        grid-area: profession;
+    } 
+}

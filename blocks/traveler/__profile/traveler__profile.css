@@ -1,0 +1,10 @@
+.traveler__profile {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 620px) {
+    .traveler__profile {
+        flex-direction: column;
+    }
+}

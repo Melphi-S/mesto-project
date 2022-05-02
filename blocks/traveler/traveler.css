@@ -1,0 +1,9 @@
+.traveler {
+    padding-top: 40px;
+}
+
+@media screen and (max-width: 620px) {
+    .traveler {
+        padding-top: 42px;
+    }
+}
