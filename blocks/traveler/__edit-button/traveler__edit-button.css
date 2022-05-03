@@ -4,18 +4,19 @@
     border: 1px #fff solid;
     box-sizing: border-box;
     padding: 0;
-    margin-left: 18px;
+    margin-top: 5px;
     background-color: transparent;
     background-image: url(../../../images/pen-button.svg);
     background-repeat: no-repeat;
     background-position: center;
+    grid-area: button;
+    place-self: center end;
 }
 
 @media screen and (max-width: 980px) {
     .traveler__edit-button {
         width: 21px;
-        height: 21px;
-        margin-left: 14px;        
+        height: 21px;    
     }
 }
 
@@ -23,7 +24,7 @@
     .traveler__edit-button {
         width: 18px;
         height: 18px;
-        margin-left: 0;        
+        margin-top: 0;
         grid-area: button;
         place-self: center end;
     }

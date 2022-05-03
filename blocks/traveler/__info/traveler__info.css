@@ -1,12 +1,12 @@
 .traveler__info {
-    font-size: 0;
+    display: grid;
+    grid-template-columns: 0px 1fr 42px;
+    grid-template-areas: ". name button"
+                         ". profession .";      
 }
 
 @media screen and (max-width: 620px) {
     .traveler__info {
-        display: grid;
         grid-template-columns: 28px 1fr 28px;
-        grid-template-areas: ". name button"
-                             ". profession .";      
     }
 }

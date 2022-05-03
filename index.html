@@ -13,7 +13,6 @@
       </header>
       <main class="content">
         <section class="traveler">
-          <div class="traveler__heading">
             <div class="traveler__profile">
               <img
                 src="images/profile-photo.jpg"
@@ -21,7 +20,7 @@
                 class="traveler__photo"
               />
               <div class="traveler__info">
-                <h2 class="traveler__name">Жак-Ив Кусто</h2>
+                <h1 class="traveler__name">Жак-Ив Кусто</h1>
                 <button
                   type="button"
                   class="traveler__edit-button button"
@@ -30,8 +29,8 @@
               </div>
             </div>
             <button type="button" class="traveler__add-button button"></button>
-          </div>
-          <div class="traveler__places">
+        </section>
+        <section class="places">
             <article class="place">
               <img
                 src="images/Saint-Petersburg.jpg"
@@ -39,7 +38,7 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Санкт-Петербург</h3>
+                <h2 class="place__name">Санкт-Петербург</h2>
                 <button
                   type="button"
                   class="place__like-button place__like-button_active button"
@@ -53,7 +52,7 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Москва</h3>
+                <h2 class="place__name">Москва</h2>
                 <button
                   type="button"
                   class="place__like-button place__like-button_active button"
@@ -67,7 +66,7 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Сочи</h3>
+                <h2 class="place__name">Сочи</h2>
                 <button
                   type="button"
                   class="place__like-button place__like-button_active button"
@@ -81,7 +80,7 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Казань</h3>
+                <h2 class="place__name">Казань</h2>
                 <button
                   type="button"
                   class="place__like-button button"
@@ -95,7 +94,7 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Иркутск</h3>
+                <h2 class="place__name">Иркутск</h2>
                 <button
                   type="button"
                   class="place__like-button place__like-button_active button"
@@ -109,14 +108,13 @@
                 class="place__image"
               />
               <div class="place__container">
-                <h3 class="place__name">Владивосток</h3>
+                <h2 class="place__name">Владивосток</h2>
                 <button
                   type="button"
                   class="place__like-button button"
                 ></button>
               </div>
             </article>
-          </div>
         </section>
       </main>
       <footer class="footer">
@@ -125,7 +123,7 @@
     </div>
     <div class="popup">
       <div class="popup__container">
-        <form class="popup__edit-form">
+        <form name="profile" class="popup__edit-form">
           <h2 class="popup__form-heading">Редактировать профиль</h2>
           <input
             type="text"

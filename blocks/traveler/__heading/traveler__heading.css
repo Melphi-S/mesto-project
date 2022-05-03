@@ -1,11 +1,11 @@
-.traveler__heading {
+/* .traveler__heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 980px) {
     .traveler__heading {
         flex-direction: column;
     }
-}
+} */

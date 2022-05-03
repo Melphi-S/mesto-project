@@ -1,5 +1,14 @@
 .traveler {
     padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 980px) {
+    .traveler {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 620px) {

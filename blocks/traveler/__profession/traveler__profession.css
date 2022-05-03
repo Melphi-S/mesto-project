@@ -4,6 +4,11 @@
     line-height: 22px;
     margin: 0;
     padding-top: 10px;
+    max-width: 450px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    grid-area: profession;
 }
 
 @media screen and (max-width: 980px) {

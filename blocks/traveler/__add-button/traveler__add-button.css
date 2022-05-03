@@ -13,8 +13,9 @@
 
 @media screen and (max-width: 980px) {
     .traveler__add-button {
-        width: 100px;
-        height: 100px;
+        width: 581px;
+        height: 50px;
+        margin-top: 32px;
     }
 }
 
@@ -22,7 +23,6 @@
     .traveler__add-button {
         width: 282px;
         height: 50px;
-        margin-top: 32px;
         background-size: 16px 16px;
     }
 }
