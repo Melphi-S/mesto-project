@@ -1,0 +1,8 @@
+.popup__container_type_zoom {
+    width: auto;
+    max-width: 75vw;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 0;
+}

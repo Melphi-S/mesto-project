@@ -5,6 +5,7 @@
     margin: 0;
     display: inline-block;
     max-width: 450px;
+    min-height: 48px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

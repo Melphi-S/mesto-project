@@ -1,0 +1,13 @@
+.place__delete-button {
+    padding: 0;
+    width: 18px;
+    height: 19px;
+    border: none;
+    background-color: transparent;
+    background-image: url(../../.././images/delete-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
