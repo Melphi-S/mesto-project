@@ -63,16 +63,16 @@ formInfoSubmit.addEventListener("submit", function (evt) {
 // создание новой карточки
 
 function createNewPlace (src, placeName) {
-  const newCard = placeTemplate.querySelector(".place").cloneNode(true); // новая карточка
-  const newCardImage = newCard.querySelector(".place__image"); // новое изображение карточки
-  const newCardName = newCard.querySelector(".place__name"); // новое имя карточки
-  const likeButton = newCard.querySelector(".place__like-button"); // кнопка like
-  const deleteButton = newCard.querySelector(".place__delete-button"); // кнопка удалить
-  const zoomOpenButton = newCard.querySelector(".place__image"); // кнопка открытия зума
+  const newPlace = placeTemplate.querySelector(".place").cloneNode(true); // новая карточка
+  const newPlaceImage = newPlace.querySelector(".place__image"); // новое изображение карточки
+  const newPlaceName = newPlace.querySelector(".place__name"); // новое имя карточки
+  const likeButton = newPlace.querySelector(".place__like-button"); // кнопка like
+  const deleteButton = newPlace.querySelector(".place__delete-button"); // кнопка удалить
+  const zoomOpenButton = newPlace.querySelector(".place__image"); // кнопка открытия зума
 
-  newCardImage.src = src;
-  newCardImage.alt = placeName;
-  newCardName.textContent = placeName;
+  newPlaceImage.src = src;
+  newPlaceImage.alt = placeName;
+  newPlaceName.textContent = placeName;
 
   // функционал кнопки like
   likeButton.addEventListener("click", function (evt) {
@@ -91,14 +91,14 @@ function createNewPlace (src, placeName) {
     zoomImage.alt = placeName;
     zoomCaption.textContent = placeName;
   }); 
-  return newCard;
+  return newPlace;
 }
 
 // добавление карточек в DOM
 
 function addNewPlace(src, placeName) {
-  const newCard = createNewPlace(src, placeName);
-  placesList.prepend(newCard);
+  const newPlaceElement = createNewPlace(src, placeName);
+  placesList.prepend(newPlaceElement);
 }
 
 //  добавление карточек в DOM / карточки при загрузке страницы
