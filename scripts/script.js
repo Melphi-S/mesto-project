@@ -50,7 +50,6 @@ closeButtons.forEach (function (button) {
   button.addEventListener("click", () => closePopup(popup))
 });
 
-
 // редактирование профиля
 
 formInfoSubmit.addEventListener("submit", function (evt) {
