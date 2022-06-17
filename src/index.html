@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body>
     <div class="page">
@@ -15,7 +14,7 @@
         <section class="traveler">
           <div class="traveler__profile">
             <img
-              src="images/profile-photo.jpg"
+              src="<%=require('./images/profile-photo.jpg')%>"
               alt="Фото профиля."
               class="traveler__photo"
             />
@@ -158,6 +157,5 @@
         ></button>
       </div>
     </div>
-    <script src="./scripts/script.js"></script>
   </body>
 </html>
