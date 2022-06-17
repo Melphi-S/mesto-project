@@ -1,0 +1,7 @@
+.popup__form-label {
+    display: block;
+}
+
+.popup__form-label:last-of-type {
+    margin-bottom: 0;
+}

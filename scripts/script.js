@@ -9,29 +9,43 @@ const zoomImage = zoomPopup.querySelector(".popup__image") // картинка �
 const zoomCaption = zoomPopup.querySelector(".popup__caption") // подпись к картинке
 
 const closeButtons = document.querySelectorAll(".popup__close-button") // кнопки закрытия попапов
+const closeAreas = document.querySelectorAll(".popup__overlay"); // оверлеи для закрытия попапов
 
 const placeTemplate = document.querySelector("#place").content; // шаблон карточки
 const placesList = document.querySelector(".places__list"); // список карточек
 
 const travelerName = document.querySelector(".traveler__name"); // имя профиля
 const travelerProfession = document.querySelector(".traveler__profession"); // род деятельности профиля
-const formInfoSubmit = document.querySelector(".popup__edit-form_type_info"); // форма для редактирования профиля
-const popupName = document.querySelector('.popup__edit-form input[name="name"]'); // инпут для имени
-const popupProfession = document.querySelector('.popup__edit-form input[name="profession"]'); //инпут для рода деятельности
 
-const formPlacesSubmit = document.querySelector(".popup__edit-form_type_place"); // форма для добавления карточки
-const popupPlace = document.querySelector('.popup__edit-form input[name="place"]'); // инпут для места
-const popupLink = document.querySelector('.popup__edit-form input[name="link"]'); // инпут для ссылки на картинку
+const formInfo = document.querySelector(".popup__edit-form_type_info"); // форма для редактирования профиля
+const inputName = document.querySelector('.popup__edit-form input[name="traveller-name"]'); // инпут для имени
+const inputProfession = document.querySelector('.popup__edit-form input[name="traveller-profession"]'); //инпут для рода деятельности
+
+const formPlace = document.querySelector(".popup__edit-form_type_place"); // форма для добавления карточки
+const inputPlaceName = document.querySelector('.popup__edit-form input[name="new-place-name"]'); // инпут для места
+const inputPlaceImage = document.querySelector('.popup__edit-form input[name="new-place-image"]'); // инпут для ссылки на картинку
+
+const currentElements = {
+  formSelector: '.popup__edit-form',
+  inputSelector: '.popup__form-item',
+  submitButtonSelector: '.popup__form-button',
+  inactiveButtonClass: 'popup__form-button_inactive',
+  inputErrorClass: 'popup__form-item_type_error',
+  errorClass: 'popup__input-error_active'
+}
 
 // открытие попапов
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", pressEsc);
 }
 
 infoOpenButton.addEventListener("click", () => {
-  popupName.value = travelerName.textContent;
-  popupProfession.value = travelerProfession.textContent;
+  inputName.value = travelerName.textContent;
+  inputProfession.value = travelerProfession.textContent;
+  checkInputValidity(formInfo, inputName, currentElements);
+  checkInputValidity(formInfo, inputProfession, currentElements);
   openPopup(infoPopup);
 });
 
@@ -43,6 +57,14 @@ placeOpenButton.addEventListener("click", () => {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", pressEsc);
+}
+
+function pressEsc(evt) {
+  const popupOpened = document.querySelector(".popup_opened");
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  }  
 }
 
 closeButtons.forEach (function (button) {
@@ -50,12 +72,17 @@ closeButtons.forEach (function (button) {
   button.addEventListener("click", () => closePopup(popup))
 });
 
+closeAreas.forEach (function (area) {
+  const popup = area.closest(".popup");
+  area.addEventListener("click", () => closePopup(popup))
+});
+
 // редактирование профиля
 
-formInfoSubmit.addEventListener("submit", function (evt) {
+formInfo.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  travelerName.textContent = popupName.value;
-  travelerProfession.textContent = popupProfession.value;
+  travelerName.textContent = inputName.value;
+  travelerProfession.textContent = inputProfession.value;
   closePopup(infoPopup);
 });
 
@@ -135,9 +162,70 @@ initialCards.forEach(function (item) {
 
 //  добавление карточек в DOM / добавление новой карточки
 
-formPlacesSubmit.addEventListener("submit", function (evt) {
+formPlace.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  addNewPlace(popupLink.value, popupPlace.value);
+  addNewPlace(inputPlaceImage.value, inputPlaceName.value);
   evt.target.reset();
   closePopup(placePopup);
 });
+
+// валидация форм
+
+function showInputError(form, input, errorMessage, elements) {
+  const inputError = form.querySelector(`.${input.id}-error`);
+  input.classList.add(elements.inputErrorClass);
+  inputError.textContent = errorMessage;
+  inputError.classList.add(elements.errorClass);
+}
+
+function hideInputError(form, input, elements) {
+  const inputError = form.querySelector(`.${input.id}-error`);
+  input.classList.remove(elements.inputErrorClass);
+  inputError.textContent = '';
+  inputError.classList.remove(elements.errorClass);
+}
+
+function checkInputValidity(form, input, elements) {
+  if (!input.validity.valid) {
+    showInputError(form, input, input.validationMessage, elements);
+  }
+  else {
+    hideInputError(form, input, elements);
+  }
+}
+
+function hasInvalidInput (inputList) {
+  return inputList.some(input => !input.validity.valid);
+}
+
+function toggleButtonState (inputList, button, elements) {
+  if (hasInvalidInput (inputList)) {
+    button.classList.add(elements.inactiveButtonClass);
+    button.setAttribute('disabled', true);
+  }
+  else {
+    button.classList.remove(elements.inactiveButtonClass);
+    button.removeAttribute('disabled');
+  }
+}
+
+function setEventListeners(form, elements) {
+  const inputList = Array.from(form.querySelectorAll(elements.inputSelector));
+  const button = form.querySelector(elements.submitButtonSelector);
+  toggleButtonState (inputList, button, elements);
+  inputList.forEach(input => {
+    input.addEventListener('input', () => {
+      checkInputValidity(form, input, elements);
+      toggleButtonState (inputList, button, elements);
+    })
+  })
+}
+
+function enableValidation(elements) {
+  const formList = Array.from(document.querySelectorAll(elements.formSelector));
+  formList.forEach(form => {
+    setEventListeners(form, elements);
+  })
+}
+
+enableValidation(currentElements);

@@ -63,25 +63,36 @@
       </footer>
     </div>
     <div class="popup popup_type_info">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
-        <form name="profile" class="popup__edit-form popup__edit-form_type_info">
+        <form name="traveller-profile" class="popup__edit-form popup__edit-form_type_info" novalidate>
           <h2 class="popup__form-heading">Редактировать профиль</h2>
-          <input
-            type="text"
-            name="name"
-            placeholder="Имя путешественника"
-            class="popup__form-item"
-            id="name-input"
-          />
-          <span class="popup__input-error name-input-error"></span>
-          <input
-            type="text"
-            name="profession"
-            placeholder="Род деятельности"
-            class="popup__form-item"
-            id="profession-input"
-          />
-          <span class="popup__input-error profession-input-error"></span>
+          <label class="popup__form-label">
+            <input
+              type="text"
+              name="traveller-name"
+              placeholder="Имя путешественника"
+              class="popup__form-item"
+              id="traveller-name-input"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="popup__input-error traveller-name-input-error"></span>
+          </label>
+          <label class="popup__form-label">
+            <input
+              type="text"
+              name="traveller-profession"
+              placeholder="Род деятельности"
+              class="popup__form-item"
+              id="traveller-profession-input"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="popup__input-error traveller-profession-input-error"></span>
+          </label>
           <button type="submit" class="popup__form-button">Сохранить</button>
         </form>
         <button
@@ -92,24 +103,38 @@
       </div>
     </div>
     <div class="popup popup_type_place">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <form
-          name="profile"
+          name="new-place"
           class="popup__edit-form popup__edit-form_type_place"
+          novalidate
         >
           <h2 class="popup__form-heading">Новое место</h2>
-          <input
-            type="text"
-            name="place"
-            placeholder="Название"
-            class="popup__form-item"
-          />
-          <input
-            type="text"
-            name="link"
-            placeholder="Ссылка на картинку"
-            class="popup__form-item"
-          />
+          <label class="popup__form-label">
+            <input
+              type="text"
+              name="new-place-name"
+              placeholder="Название"
+              class="popup__form-item"
+              minlength="2"
+              maxlength="30" 
+              id="new-place-name-input"  
+              required         
+            />
+            <span class="popup__input-error new-place-name-input-error"></span>
+          </label>
+          <label class="popup__form-label">
+            <input
+              type="url"
+              name="new-place-image"
+              placeholder="Ссылка на картинку"
+              class="popup__form-item"
+              id="new-place-image-input"
+              required
+            />
+            <span class="popup__input-error new-place-image-input-error"></span>
+          </label>
           <button type="submit" class="popup__form-button">Сохранить</button>
         </form>
         <button
@@ -120,6 +145,7 @@
       </div>
     </div>
     <div class="popup popup_type_zoom">
+      <div class="popup__overlay"></div>
       <div class="popup__container popup__container_type_zoom">
         <figure class="popup__figure">
           <img src="" alt="" class="popup__image" />

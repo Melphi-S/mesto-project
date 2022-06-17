@@ -2,4 +2,6 @@
     border: 1px solid #000000;
     color: #000000;
     background: transparent;
+    pointer-events: none;
+    opacity: 0.2;
 }
