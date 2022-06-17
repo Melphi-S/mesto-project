@@ -12,6 +12,8 @@ const currentElements = {
     errorClass: 'popup__input-error_active'
   }
 
+const popups = document.querySelectorAll(".popup")
+
 const infoPopup = document.querySelector(".popup_type_info"); // попап для редактирования профиля
 const formInfo = document.querySelector(".popup__edit-form_type_info"); // форма для редактирования профиля
 const inputName = document.querySelector('.popup__edit-form input[name="traveller-name"]'); // инпут для имени
@@ -21,13 +23,12 @@ const travelerProfession = document.querySelector(".traveler__profession"); // �
 
 const placePopup = document.querySelector(".popup_type_place"); // попап для добавления карточки
 const formPlace = document.querySelector(".popup__edit-form_type_place"); // форма для добавления карточки
+const buttonPlace = formPlace.querySelector('.popup__form-button'); // submit формы для добавления карточки
 const inputPlaceName = document.querySelector('.popup__edit-form input[name="new-place-name"]'); // инпут для места
 const inputPlaceImage = document.querySelector('.popup__edit-form input[name="new-place-image"]'); // инпут для ссылки на картинку
 
 const infoOpenButton = document.querySelector(".traveler__edit-button"); // кнопка открытия
 const placeOpenButton = document.querySelector(".traveler__add-button"); // кнопка открытия
-const closeButtons = document.querySelectorAll(".popup__close-button") // кнопки закрытия попапов
-const closeAreas = document.querySelectorAll(".popup__overlay"); // оверлеи для закрытия попапов
 
 infoOpenButton.addEventListener("click", () => {
   inputName.value = travelerName.textContent;
@@ -41,15 +42,16 @@ placeOpenButton.addEventListener("click", () => {
   openPopup(placePopup);
 });
 
-closeButtons.forEach(function (button) {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-closeAreas.forEach(function (area) {
-  const popup = area.closest(".popup");
-  area.addEventListener("click", () => closePopup(popup));
-});
+popups.forEach(popup => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup__overlay')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup)
+    }
+  })
+})
 
 formInfo.addEventListener("submit", function (evt) {
   evt.preventDefault();
@@ -62,6 +64,8 @@ formPlace.addEventListener("submit", function (evt) {
   evt.preventDefault();
   addNewPlace(inputPlaceImage.value, inputPlaceName.value);
   evt.target.reset();
+  buttonPlace.classList.add('popup__form-button_inactive');
+  buttonPlace.setAttribute('disabled', true);
   closePopup(placePopup);
 });
 
