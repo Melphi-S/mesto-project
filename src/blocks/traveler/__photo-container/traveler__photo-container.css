@@ -1,0 +1,23 @@
+.traveler__photo-container {
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px;
+    border-radius: 50%;
+}
+
+.traveler__photo-container:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../../images/pen-button.svg) rgba(0, 0, 0, 0.8) no-repeat center;
+}
+
+@media screen and (max-width: 620px) {
+    .traveler__photo-container {
+        margin-bottom: 26px;
+        margin-right: 0;
+    }
+}

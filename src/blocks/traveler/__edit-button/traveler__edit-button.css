@@ -5,10 +5,7 @@
     box-sizing: border-box;
     padding: 0;
     margin-top: 5px;
-    background-color: transparent;
-    background-image: url(../../../images/pen-button.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url(../../../images/pen-button.svg) transparent no-repeat center / 10px 10px;
     grid-area: button;
     place-self: center end;
 }

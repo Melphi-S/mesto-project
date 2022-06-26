@@ -8,6 +8,7 @@
 @import url(../blocks/traveler/__heading/traveler__heading.css);
 @import url(../blocks/traveler/__add-button/traveler__add-button.css);
 @import url(../blocks//button/button.css);
+@import url(../blocks/traveler/__photo-container/traveler__photo-container.css);
 @import url(../blocks/traveler/__photo/traveler__photo.css);
 @import url(../blocks/traveler/__info/traveler__info.css);
 @import url(../blocks/traveler/__name/traveler__name.css);
@@ -18,6 +19,8 @@
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__name/place__name.css);
+@import url(../blocks/place/__like-container/place__like-container.css);
+@import url(../blocks/place/__like-counter/place__like-counter.css);
 @import url(../blocks/place/__like-button/place__like-button.css);
 @import url(../blocks/place/__like-button/_active/place__like-button_active.css);
 @import url(../blocks/place/__container/place__container.css);
@@ -25,7 +28,6 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__overlay/popup__overlay.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form-heading/popup__form-heading.css);
 @import url(../blocks/popup/__form-item/popup__form-item.css);
