@@ -1,4 +1,4 @@
-import {openPopup} from './modal.js';
+import {closePopup, openPopup} from './modal.js';
 import {putLike, deleteLike, deleteCard} from './api.js'
 
 const placeTemplate = document.querySelector("#place").content; // шаблон карточки
@@ -8,6 +8,9 @@ const zoomPopup = document.querySelector(".popup_type_zoom"); //попап дл�
 const zoomImage = zoomPopup.querySelector(".popup__image"); // картинка в попапе
 const zoomCaption = zoomPopup.querySelector(".popup__caption"); // подпись к картинке
 
+const deletionPopup = document.querySelector(".popup_type_deletion"); //попап для удаления карточки
+const deletionForm = document.querySelector(".popup__edit-form_type_deletion"); //форма для удаления карточки
+
 function createNewPlace(cardInfo) {
   const newPlace = placeTemplate.querySelector(".place").cloneNode(true); // новая карточка
   const newPlaceImage = newPlace.querySelector(".place__image"); // новое изображение карточки
@@ -16,7 +19,7 @@ function createNewPlace(cardInfo) {
   const likeCounter = newPlace.querySelector(".place__like-counter"); //
   const deleteButton = newPlace.querySelector(".place__delete-button"); // кнопка удалить
   const zoomOpenButton = newPlace.querySelector(".place__image"); // кнопка открытия зума
-
+  
   newPlaceImage.src = cardInfo.link;
   newPlaceImage.alt = cardInfo.name;
   newPlaceName.textContent = cardInfo.name;
@@ -45,9 +48,16 @@ function createNewPlace(cardInfo) {
 
   // функционал кнопки delete;
   deleteButton.addEventListener("click", function () {
-    deleteCard(cardInfo._id)
-      .then (() => deleteButton.closest(".place").remove())
-      .catch(err => console.log(err))
+    openPopup(deletionPopup);
+    deletionForm.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+      deleteCard(cardInfo._id)
+        .then (() => {
+          deleteButton.closest(".place").remove();
+          closePopup(deletionPopup);
+        })
+        .catch(err => console.log(err))
+    });
    });
 
   // открытие попапа для зума
