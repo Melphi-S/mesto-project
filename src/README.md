@@ -8,7 +8,8 @@
 * HTML,
 * CSS,
 * JavaScript,
-* Webpack
+* Webpack,
+* API
 
 ## Ссылки
 [Яндекс.Практикум](https://practicum.yandex.ru/)
