@@ -1,4 +1,4 @@
-// import '../styles/index.css';
+import '../styles/index.css';
 import addNewPlace from './card.js';
 import {openPopup, closePopup} from './modal.js';
 import {enableValidation, checkInputValidity, disableButton} from './validate.js';
