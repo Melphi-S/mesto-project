@@ -46,21 +46,35 @@ function createNewPlace(cardInfo) {
     }  
   });
 
+
+
   // функционал кнопки delete;
+  function confirmCardDeletion(evt) {
+    evt.preventDefault();
+    deleteCard(cardInfo._id)
+      .then(() => {
+        document.getElementById(`${cardInfo._id}`).remove();
+        deletionForm.removeEventListener("submit", confirmCardDeletion);
+        deletionPopup.removeEventListener('mousedown', cancelCardDeletion);
+        document.removeEventListener('keydown', cancelCardDeletion)
+        closePopup(deletionPopup);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function cancelCardDeletion(evt) {
+    if (evt.target.classList.contains('popup_type_deletion') || evt.target.classList.contains('popup__close-button') || evt.key === "Escape") {
+      deletionForm.removeEventListener("submit", confirmCardDeletion);
+      deletionPopup.removeEventListener('mousedown', cancelCardDeletion);
+      document.removeEventListener('keydown', cancelCardDeletion);
+    }
+  }
+
   deleteButton.addEventListener("click", function () {
     openPopup(deletionPopup);
-    deletionForm.addEventListener("submit", function confirmCardDeletion(evt) {
-      evt.preventDefault();
-      deleteCard(cardInfo._id)
-        .then(() => {
-          document.getElementById(`${cardInfo._id}`).remove();
-          closePopup(deletionPopup);
-        })
-        .then(() =>
-          deletionForm.removeEventListener("submit", confirmCardDeletion)
-        )
-        .catch((err) => console.log(err));
-    });
+    deletionForm.addEventListener("submit", confirmCardDeletion);
+    deletionPopup.addEventListener('mousedown', cancelCardDeletion);
+    document.addEventListener('keydown', cancelCardDeletion);
   });
 
   // открытие попапа для зума
