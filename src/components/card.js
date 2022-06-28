@@ -1,4 +1,5 @@
 import {openPopup} from './modal.js';
+import {putLike, deleteLike, deleteCard} from './api.js'
 
 const placeTemplate = document.querySelector("#place").content; // шаблон карточки
 const placesList = document.querySelector(".places__list"); // список карточек
@@ -7,7 +8,7 @@ const zoomPopup = document.querySelector(".popup_type_zoom"); //попап дл�
 const zoomImage = zoomPopup.querySelector(".popup__image"); // картинка в попапе
 const zoomCaption = zoomPopup.querySelector(".popup__caption"); // подпись к картинке
 
-function createNewPlace(src, placeName, likes) {
+function createNewPlace(cardInfo) {
   const newPlace = placeTemplate.querySelector(".place").cloneNode(true); // новая карточка
   const newPlaceImage = newPlace.querySelector(".place__image"); // новое изображение карточки
   const newPlaceName = newPlace.querySelector(".place__name"); // новое имя карточки
@@ -16,39 +17,51 @@ function createNewPlace(src, placeName, likes) {
   const deleteButton = newPlace.querySelector(".place__delete-button"); // кнопка удалить
   const zoomOpenButton = newPlace.querySelector(".place__image"); // кнопка открытия зума
 
-  newPlaceImage.src = src;
-  newPlaceImage.alt = placeName;
-  newPlaceName.textContent = placeName;
-  likeCounter.textContent = likes;
+  newPlaceImage.src = cardInfo.link;
+  newPlaceImage.alt = cardInfo.name;
+  newPlaceName.textContent = cardInfo.name;
+  newPlace.id = cardInfo._id;
+  likeCounter.textContent = cardInfo.likes.length;
 
   // функционал кнопки like
   likeButton.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("place__like-button_active");
+    if (!evt.target.classList.contains("place__like-button_active")) {
+      putLike(cardInfo._id)
+        .then(res => {
+          evt.target.classList.add("place__like-button_active");
+          likeCounter.textContent = res.likes.length;
+        })
+        .catch(err => console.log(err))
+    }
+    else {
+      deleteLike(cardInfo._id)
+      .then(res => {
+        evt.target.classList.remove("place__like-button_active");
+        likeCounter.textContent = res.likes.length;
+      })
+      .catch(err => console.log(err))
+    }  
   });
 
   // функционал кнопки delete;
   deleteButton.addEventListener("click", function () {
-    deleteButton.closest(".place").remove();
-  });
+    deleteCard(cardInfo._id)
+      .then (() => deleteButton.closest(".place").remove())
+      .catch(err => console.log(err))
+   });
 
   // открытие попапа для зума
   zoomOpenButton.addEventListener("click", function () {
     openPopup(zoomPopup);
-    zoomImage.src = src;
-    zoomImage.alt = placeName;
-    zoomCaption.textContent = placeName;
+    zoomImage.src = cardInfo.link;
+    zoomImage.alt = cardInfo.name;
+    zoomCaption.textContent = cardInfo.name;
   });
   return newPlace;
 }
 
-export function addNewPlace(src, placeName, likes) {
-  const newPlaceElement = createNewPlace(src, placeName, likes);
+export default function addNewPlace(cardInfo) {
+  const newPlaceElement = createNewPlace(cardInfo);
   placesList.prepend(newPlaceElement);
 }
-
-// export function countLikes(number, card) {
-//   likeCounter = card.querySelector('.place__like-counter');
-//   likeCounter.textContent = number;
-// }
-
 

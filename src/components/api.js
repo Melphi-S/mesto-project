@@ -24,7 +24,7 @@ export function getInitialCards() {
         .then(onResponce)
 }
 
-export function editUserAvatar (userAvatar) {
+export function patchUserAvatar (userAvatar) {
     return fetch(`${config.url}/users/me/avatar`, {
         method: "PATCH",
         headers: config.headers,
@@ -33,7 +33,7 @@ export function editUserAvatar (userAvatar) {
         .then(onResponce)
 }
 
-export function editUserInfo(userInfo) {
+export function patchUserInfo(userInfo) {
     return fetch(`${config.url}/users/me`, {
         method: "PATCH",
         headers: config.headers,
@@ -42,7 +42,7 @@ export function editUserInfo(userInfo) {
         .then(onResponce)
 }
 
-export function createNewCard(cardInfo) {
+export function postNewCard(cardInfo) {
     return fetch(`${config.url}/cards`, {
         method: "POST",
         headers: config.headers,
@@ -51,11 +51,26 @@ export function createNewCard(cardInfo) {
         .then(onResponce)
 }
 
-export function like(cardID) {
-    return fetch(`${config.url}/cards/likes/${cardID}`, {
+export function putLike(cardId) {
+    return fetch(`${config.url}/cards/likes/${cardId}`, {
         method: "PUT",
-        headers: config.headers,
-        body: JSON.stringify(cardID)
+        headers: config.headers
     })
         .then(onResponce)
+}
+
+export function deleteLike(cardId) {
+    return fetch(`${config.url}/cards/likes/${cardId}`, {
+        method: "DELETE",
+        headers: config.headers
+    })
+        .then(onResponce)
+}
+
+export function deleteCard(cardId) {
+    return fetch(`${config.url}/cards/${cardId}`, {
+        method: "DELETE",
+        headers: config.headers
+    })
+        .then(onResponce) 
 }

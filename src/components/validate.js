@@ -24,13 +24,21 @@ function hasInvalidInput(inputList) {
   return inputList.some((input) => !input.validity.valid);
 }
 
+function disableButton (button, elements) {
+  button.classList.add(elements.inactiveButtonClass);
+  button.setAttribute("disabled", true);
+}
+
+function enableButton (button, elements) {
+  button.classList.remove(elements.inactiveButtonClass);
+  button.removeAttribute("disabled");
+}
+
 function toggleButtonState(inputList, button, elements) {
   if (hasInvalidInput(inputList)) {
-    button.classList.add(elements.inactiveButtonClass);
-    button.setAttribute("disabled", true);
+    disableButton (button, elements);
   } else {
-    button.classList.remove(elements.inactiveButtonClass);
-    button.removeAttribute("disabled");
+    enableButton (button, elements);
   }
 }
 
@@ -53,4 +61,4 @@ function enableValidation(elements) {
   });
 }
 
-export {checkInputValidity, enableValidation}
+export {checkInputValidity, enableValidation, disableButton}

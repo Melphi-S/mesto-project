@@ -1,8 +1,8 @@
 // import '../styles/index.css';
-import {addNewPlace} from './card.js';
+import addNewPlace from './card.js';
 import {openPopup, closePopup} from './modal.js';
-import {enableValidation, checkInputValidity} from './validate.js';
-import {getUserInfo, getInitialCards, editUserAvatar, editUserInfo, createNewCard} from './api.js';
+import {enableValidation, checkInputValidity, disableButton} from './validate.js';
+import {getUserInfo, getInitialCards, patchUserAvatar, patchUserInfo, postNewCard} from './api.js';
 
 getUserInfo()
   .then (res => console.log(res))
@@ -10,21 +10,23 @@ getUserInfo()
 getInitialCards()
   .then (res => console.log(res))  
 
-getUserInfo()
-  .then((res) => {
-    travelerName.textContent = res.name;
-    travelerProfession.textContent = res.about;
-    travelerAvatar.src = res.avatar;
-  })
-  .catch((err) => console.log(err))
 
-getInitialCards()
-  .then((cards) => {
-    cards.forEach(function (card) {
-      addNewPlace(card.link, card.name, card.likes.length);
-    });
+Promise.all([getInitialCards(), getUserInfo()])
+  .then(([cards, userInfo]) => {
+    travelerName.textContent = userInfo.name;
+    travelerProfession.textContent = userInfo.about;
+    travelerAvatar.src = userInfo.avatar;
+    cards.reverse().forEach(card => {
+      addNewPlace(card);
+      if (card.owner._id !== userInfo._id) {
+        document.getElementById(`${card._id}`).querySelector('.place__delete-button').classList.add('place__delete-button_inactive')
+      }
+      if (card.likes.some(like => like._id === userInfo._id)) {
+        document.getElementById(`${card._id}`).querySelector('.place__like-button').classList.add('place__like-button_active')
+      }
+    })
   })
-  .catch((err) => console.log(err))
+  .catch(err => console.log(err))
 
 const currentElements = {
     formSelector: '.popup__edit-form',
@@ -43,6 +45,7 @@ const inputName = document.querySelector('.popup__edit-form input[name="travelle
 const inputProfession = document.querySelector('.popup__edit-form input[name="traveller-profession"]'); //инпут для рода деятельности
 const travelerName = document.querySelector(".traveler__name"); // имя профиля
 const travelerProfession = document.querySelector(".traveler__profession"); // род деятельности профиля
+const buttonInfo = formInfo.querySelector('.popup__form-button'); // submit формы для редактирования профиля
 
 const travelerAvatar = document.querySelector('.traveler__photo'); // аватар
 const avatarPopup = document.querySelector(".popup_type_avatar"); // попап для редактирования аватара
@@ -59,9 +62,6 @@ const inputPlaceImage = document.querySelector('.popup__edit-form input[name="ne
 const infoOpenButton = document.querySelector(".traveler__edit-button"); // кнопка открытия для редактирования инфо
 const placeOpenButton = document.querySelector(".traveler__add-button"); // кнопка открытия для добавления места
 const avatarOpenButton = document.querySelector('.traveler__photo-container'); // кнопка открытия для редактирования автара
-
-travelerName.textContent
-travelerProfession.textContent
 
 infoOpenButton.addEventListener("click", () => {
   inputName.value = travelerName.textContent;
@@ -89,39 +89,45 @@ popups.forEach(popup => {
 
 formAvatar.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  editUserAvatar({avatar: inputAvatarImage.value})
+  buttonAvatar.textContent = "Сохранение..."
+  patchUserAvatar({avatar: inputAvatarImage.value})
     .then ((data) => {
       travelerAvatar.src = data.avatar;
       evt.target.reset();
-      buttonAvatar.classList.add('popup__form-button_inactive');
-      buttonAvatar.setAttribute('disabled', true);
+      disableButton(buttonAvatar, currentElements);
       closePopup(avatarPopup);
     } )
     .catch(err => console.log(err))
+    .finally (() => buttonAvatar.textContent = "Сохранить")
 });
 
 formInfo.addEventListener("submit", function (evt) {
+  buttonInfo.textContent = "Сохранение..."
   evt.preventDefault();
-  editUserInfo({ name: inputName.value, about: inputProfession.value })
+  patchUserInfo({ name: inputName.value, about: inputProfession.value })
     .then((data) => {
       travelerName.textContent = data.name;
       travelerProfession.textContent = data.about;
+      disableButton(buttonInfo, currentElements);
       closePopup(infoPopup);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally (() => buttonInfo.textContent = "Сохранить")
 });
 
 formPlace.addEventListener("submit", function (evt) {
+  buttonPlace.textContent = "Сохранение..."
   evt.preventDefault();
-  createNewCard({name: inputPlaceName.value, link: inputPlaceImage.value})
+  postNewCard({name: inputPlaceName.value, link: inputPlaceImage.value})
     .then((data) => {
-      addNewPlace(data.link, data.name);
+      console.log(data);
+      addNewPlace(data);
       evt.target.reset();
-      buttonPlace.classList.add('popup__form-button_inactive');
-      buttonPlace.setAttribute('disabled', true);
+      disableButton(buttonPlace, currentElements);
       closePopup(placePopup);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally (() => buttonPlace.textContent = "Сохранить")
 });
 
 enableValidation(currentElements);
