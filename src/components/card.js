@@ -49,16 +49,19 @@ function createNewPlace(cardInfo) {
   // функционал кнопки delete;
   deleteButton.addEventListener("click", function () {
     openPopup(deletionPopup);
-    deletionForm.addEventListener("submit", function (evt) {
+    deletionForm.addEventListener("submit", function confirmCardDeletion(evt) {
       evt.preventDefault();
       deleteCard(cardInfo._id)
-        .then (() => {
-          deleteButton.closest(".place").remove();
+        .then(() => {
+          document.getElementById(`${cardInfo._id}`).remove();
           closePopup(deletionPopup);
         })
-        .catch(err => console.log(err))
+        .then(() =>
+          deletionForm.removeEventListener("submit", confirmCardDeletion)
+        )
+        .catch((err) => console.log(err));
     });
-   });
+  });
 
   // открытие попапа для зума
   zoomOpenButton.addEventListener("click", function () {

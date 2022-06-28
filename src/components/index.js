@@ -4,13 +4,6 @@ import {openPopup, closePopup} from './modal.js';
 import {enableValidation, checkInputValidity, disableButton} from './validate.js';
 import {getUserInfo, getInitialCards, patchUserAvatar, patchUserInfo, postNewCard} from './api.js';
 
-getUserInfo()
-  .then (res => console.log(res))
-
-getInitialCards()
-  .then (res => console.log(res))  
-
-
 Promise.all([getInitialCards(), getUserInfo()])
   .then(([cards, userInfo]) => {
     travelerName.textContent = userInfo.name;
@@ -120,7 +113,6 @@ formPlace.addEventListener("submit", function (evt) {
   evt.preventDefault();
   postNewCard({name: inputPlaceName.value, link: inputPlaceImage.value})
     .then((data) => {
-      console.log(data);
       addNewPlace(data);
       evt.target.reset();
       disableButton(buttonPlace, currentElements);
