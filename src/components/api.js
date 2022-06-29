@@ -6,7 +6,7 @@ const config = {
     }
 }
 
-function onResponce(res) {
+function checkResponce(res) {
     return res.ok ? res.json() : Promise.reject(res);
 }
 
@@ -14,14 +14,14 @@ export function getUserInfo() {
     return fetch(`${config.url}/users/me`, {
         headers: config.headers
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function getInitialCards() {
     return fetch(`${config.url}/cards`, {
         headers: config.headers
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function patchUserAvatar (userAvatar) {
@@ -30,7 +30,7 @@ export function patchUserAvatar (userAvatar) {
         headers: config.headers,
         body: JSON.stringify(userAvatar)
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function patchUserInfo(userInfo) {
@@ -39,7 +39,7 @@ export function patchUserInfo(userInfo) {
         headers: config.headers,
         body: JSON.stringify(userInfo)
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function postNewCard(cardInfo) {
@@ -48,7 +48,7 @@ export function postNewCard(cardInfo) {
         headers: config.headers,
         body: JSON.stringify(cardInfo)
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function putLike(cardId) {
@@ -56,7 +56,7 @@ export function putLike(cardId) {
         method: "PUT",
         headers: config.headers
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function deleteLike(cardId) {
@@ -64,7 +64,7 @@ export function deleteLike(cardId) {
         method: "DELETE",
         headers: config.headers
     })
-        .then(onResponce)
+        .then(checkResponce)
 }
 
 export function deleteCard(cardId) {
@@ -72,5 +72,5 @@ export function deleteCard(cardId) {
         method: "DELETE",
         headers: config.headers
     })
-        .then(onResponce) 
+        .then(checkResponce) 
 }

@@ -10,6 +10,19 @@ const zoomCaption = zoomPopup.querySelector(".popup__caption"); // подпис�
 
 const deletionPopup = document.querySelector(".popup_type_deletion"); //попап для удаления карточки
 const deletionForm = document.querySelector(".popup__edit-form_type_deletion"); //форма для удаления карточки
+let cardToDelete = null;
+
+function confirmCardDeletion(evt) {
+  evt.preventDefault();
+  deleteCard(cardToDelete.id)
+    .then(() => {
+      cardToDelete.remove();
+      closePopup(deletionPopup);
+    })
+    .catch((err) => console.log(err));
+}
+
+deletionForm.addEventListener("submit", confirmCardDeletion);
 
 function createNewPlace(cardInfo) {
   const newPlace = placeTemplate.querySelector(".place").cloneNode(true); // новая карточка
@@ -46,35 +59,10 @@ function createNewPlace(cardInfo) {
     }  
   });
 
-
-
   // функционал кнопки delete;
-  function confirmCardDeletion(evt) {
-    evt.preventDefault();
-    deleteCard(cardInfo._id)
-      .then(() => {
-        document.getElementById(`${cardInfo._id}`).remove();
-        deletionForm.removeEventListener("submit", confirmCardDeletion);
-        deletionPopup.removeEventListener('mousedown', cancelCardDeletion);
-        document.removeEventListener('keydown', cancelCardDeletion)
-        closePopup(deletionPopup);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function cancelCardDeletion(evt) {
-    if (evt.target.classList.contains('popup_type_deletion') || evt.target.classList.contains('popup__close-button') || evt.key === "Escape") {
-      deletionForm.removeEventListener("submit", confirmCardDeletion);
-      deletionPopup.removeEventListener('mousedown', cancelCardDeletion);
-      document.removeEventListener('keydown', cancelCardDeletion);
-    }
-  }
-
   deleteButton.addEventListener("click", function () {
     openPopup(deletionPopup);
-    deletionForm.addEventListener("submit", confirmCardDeletion);
-    deletionPopup.addEventListener('mousedown', cancelCardDeletion);
-    document.addEventListener('keydown', cancelCardDeletion);
+    cardToDelete = newPlace;
   });
 
   // открытие попапа для зума
@@ -87,8 +75,14 @@ function createNewPlace(cardInfo) {
   return newPlace;
 }
 
-export default function addNewPlace(cardInfo) {
+export default function addNewPlace(cardInfo, userId) {
   const newPlaceElement = createNewPlace(cardInfo);
+  if (cardInfo.owner._id !== userId) {
+    newPlaceElement.querySelector('.place__delete-button').classList.add('place__delete-button_inactive')
+  }
+  if (cardInfo.likes.some(like => like._id === userId)) {
+    newPlaceElement.querySelector('.place__like-button').classList.add('place__like-button_active')
+  }
   placesList.prepend(newPlaceElement);
 }
 
