@@ -81,7 +81,6 @@ formAvatar.addEventListener("submit", function (evt) {
   buttonAvatar.textContent = "Сохранение..."
   patchUserAvatar({avatar: inputAvatarImage.value})
     .then ((userInfo) => {
-      console.log(data);
       travelerAvatar.src = userInfo.avatar;
       evt.target.reset();
       disableButton(buttonAvatar, currentElements);
